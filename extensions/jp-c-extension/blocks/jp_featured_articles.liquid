@@ -1,6 +1,6 @@
 {% comment %} 
  
-  Custom section created by JadePuma
+  Custom app block created by JadePuma
   Instructions - https://jadepuma.com/blogs/shopify-tutorials/featured-promotions-grid-layout-for-flex-theme
   Last editted - 26Jan24 
 {% endcomment %}
@@ -25,8 +25,6 @@
 {% endstyle %}
 
 {% comment %} HTML markup {% endcomment %}
-<p>{{ blog.title }} {{ block.settings.home_page_articles }} </p>
-
 <section class="section
                   {{ block.settings.css_class }}
                   is-width-{{ block.settings.width }}"
@@ -36,23 +34,19 @@
   
     {% if title != blank %}
       <div class="container">
-        {% comment %} {% render 'heading',
+{% render 'heading',
                 title: title,
                 heading_tag: 'h2',
                 context: 'featured-blog',
                 text_alignment: 'center',
-        %} {% endcomment %}
+        %} 
       </div>
     {% endif %}
   
-    <div class="container">
+    <div class="is-flex is-flex-nowrap is-justify-center">
         {% for article in blog.articles limit:block.settings.home_page_articles %}
-
-            <!-- {{ article.title }}-->
-  
-        {% assign article = block.settings.article_widget_select %}
-  
-              <div id="shopify-section-{{ block.id }}"
+    
+              <div id="jp-section-{{ block.id }}"
               class="featured-article blog-card
                 featured-promotions__block featured-promotions__block--{{ forloop.length }} medium-down--one-whole
               {% if block.settings.home_page_articles == 2 %}
@@ -64,30 +58,30 @@
               {% elsif block.settings.home_page_articles == 5 %}
                 one-fifth
                 {% endif %}
-                column has-color-override article card show-border-{{ block.settings.show-border }} has-margin-bottom"
+                column has-color-override article card show-border-{{ block.settings.show-border }} has-margin"
                 data-promo-index={{ forloop.index0 }} {{ block.shopify_attributes }}>
   
               {% if article.image != blank %}
                 <div class="card-image blog-card__image">
                   <figure class="image">
                     <a class="blog-card__link" href="{{ article.url }}" title="{{ article.title | escape }}">
-                      {% comment %} {% render 'image-element',
+                 {% render 'image-element',
                               image: article.image,
                               alt: article.image.alt,
-                              additional_classes: 'blog-card__image'
-                      %} {% endcomment %}
+                              additional_classes: 'blog-card__image',
+                              back_to_basics:true
+                      %}
                     </a>
                   </figure>
                 </div>
               {% endif %}
   
               <div class="card-content blog-card__content">
-                <div class="media">
                   <div class="media-content">
-                    <h3 class="title">
+
+                      {% comment %} <p>{{ article.title }}</p> {% endcomment %}
                       <a class="featured-article--link" href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
-                    </h3>
-                  </div>
+
                 </div>
   
                 {% if article.excerpt != blank and block.settings.blog_show_excerpt%}
@@ -117,23 +111,23 @@
                     {% endif %}
                   {% endif %}
   
-                  {% comment %} {% render 'meta-info-list',
+                 {% render 'meta-info-list',
                           article: article,
                           blog_author: block.settings.blog_author,
                           blog_date: block.settings.blog_date,
                           blog_read_time: block.settings.read_time,
                           blog_comment_count: block.settings.blog_comment_count
-                  %} {% endcomment %}
+                  %} 
                 </div>
               </div>
             {% if block.settings.button_type != 'none' %}
               <div class="blog-card__read-more">
-                {% comment %} {% render 'button',
+                {% render 'button',
                         label: block.settings.button_label,
                         href: article.url,
                         type: "link",
                         style: block.settings.button_type
-                %} {% endcomment %}
+                %} 
               </div>
             {% endif %}
             </div>
