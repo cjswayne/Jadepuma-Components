@@ -1,7 +1,7 @@
 {% comment %}
   Custom app block created by JadePuma
   Instructions - https://jadepuma.com/blogs/shopify-tutorials/featured-promotions-grid-layout-for-flex-theme
-  Last editted - 26Jan24 
+  Last editted - 3/12/24 
 {% endcomment %}
 
 {%- assign title = block.settings.title -%}
@@ -23,7 +23,7 @@
 %} */
 {% endstyle %}
 <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
-<link rel="stylesheet" href="https://obscure-crag-31778-2e8e3822a617.herokuapp.com/styles.css"/>
+<link rel="stylesheet" href="https://glacial-thicket-86354-6b7ec0b9d5b3.herokuapp.com/styles.css"/>
 
 {% comment %} HTML markup {% endcomment %}
 <section class="section pa2
@@ -140,6 +140,7 @@
     "name": "JP Featured articles",
     "class": "blog-posts blog-posts--1",
     "target": "section",
+    "templates": [ "article" ],
     "settings": [
       {
         "type": "text",
