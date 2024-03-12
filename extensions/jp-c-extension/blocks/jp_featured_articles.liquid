@@ -1,5 +1,4 @@
-{% comment %} 
- 
+{% comment %}
   Custom app block created by JadePuma
   Instructions - https://jadepuma.com/blogs/shopify-tutorials/featured-promotions-grid-layout-for-flex-theme
   Last editted - 26Jan24 
@@ -23,13 +22,15 @@
           id: block.id
 %} */
 {% endstyle %}
+<link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+<link rel="stylesheet" href="https://obscure-crag-31778-2e8e3822a617.herokuapp.com/styles.css"/>
 
 {% comment %} HTML markup {% endcomment %}
-<section class="section
+<section class="section pa2
                   {{ block.settings.css_class }}
                   is-width-{{ block.settings.width }}"
                   {% if block.settings.animation != "none" %}
-                    data-scroll-class="{{ block.settings.animation }}"
+                    data-scroll-class="{{ block.settings.animation }} "
                   {% endif %}>
   
     {% if title != blank %}
@@ -78,10 +79,7 @@
   
               <div class="card-content blog-card__content">
                   <div class="media-content">
-
-                      {% comment %} <p>{{ article.title }}</p> {% endcomment %}
                       <a class="featured-article--link" href="{{ article.url }}" title="{{ article.title | escape }}">{{ article.title }}</a>
-
                 </div>
   
                 {% if article.excerpt != blank and block.settings.blog_show_excerpt%}
