@@ -1,8 +1,8 @@
 {% comment %} 
-   
-    Custom app block added by JadePuma
-    Instructions - https://jadepuma.com/blogs/shopify-tutorials/promote-a-product-in-an-article-in-the-flex-theme
-    Last editted - 2/12/24 
+     
+      Custom app block added by JadePuma
+      Instructions - https://jadepuma.com/blogs/shopify-tutorials/promote-a-product-in-an-article-in-the-flex-theme
+      Last editted - 2/12/24 
 {% endcomment %}
 
 {% assign feature_product_array = article.metafields.jadepuma.featured_products.value %}
@@ -38,7 +38,7 @@
 
   {% endstyle %}
 
-<link rel="stylesheet" href="https://glacial-thicket-86354-6b7ec0b9d5b3.herokuapp.com/styles.css"/>
+  <link rel="stylesheet" href="https://glacial-thicket-86354-6b7ec0b9d5b3.herokuapp.com/styles.css" />
 
 
   {% comment %} HTML markup {% endcomment %}
@@ -51,73 +51,94 @@
     data-scroll-class="{{ block.settings.animation }}"
     {% endif %}>
 
-    <div>
-      <p>{{ block.settings.heading }}</p>
-<p>{{ block.settings.multiple_products_heading }}</p>
-<p>{{ block.settings.heading_color }}</p>
-<p>{{ block.settings.heading_background_color }}</p>
-<p>{{ block.settings.products_per_row }}</p>
-<p>{{ block.settings.set_grid_images_height }}</p>
-<p>{{ block.settings.multiple_products_height }}</p>
-<p>{{ block.settings.hide-price }}</p>
-<p>{{ block.settings.button_text }}</p>
-<p>{{ block.settings.show_description }}</p>
-<p>{{ block.settings.custom_description }}</p>
-<p>{{ block.settings.product_images_position }}</p>
-<p>{{ block.settings.set_product_height }}</p>
-<p>{{ block.settings.product_height }}</p>
-<p>{{ block.settings.video_looping }}</p>
-<p>{{ block.settings.gallery_arrows }}</p>
-<p>{{ block.settings.enable_zoom }}</p>
-<p>{{ block.settings.enable_product_lightbox }}</p>
-<p>{{ block.settings.slideshow_speed }}</p>
-<p>{{ block.settings.slideshow_transition }}</p>
-<p>{{ block.settings.display_thumbnails }}</p>
-<p>{{ block.settings.thumbnail_position }}</p>
-<p>{{ block.settings.enable_thumbnail_slider }}</p>
-<p>{{ block.settings.width }}</p>
-<p>{{ block.settings.padding_top }}</p>
-<p>{{ block.settings.padding_bottom }}</p>
-<p>{{ block.settings.animation }}</p>
-<p>{{ block.settings.css_class }}</p>
-<p>{{ block.settings.custom_css }}</p>
-
-    </div>
+    {% comment %} <div>
+            <p>{{ block.settings.heading }}</p>
+      <p>{{ block.settings.multiple_products_heading }}</p>
+      <p>{{ block.settings.heading_color }}</p>
+      <p>{{ block.settings.heading_background_color }}</p>
+      <p>{{ block.settings.products_per_row }}</p>
+      <p>{{ block.settings.set_grid_images_height }}</p>
+      <p>{{ block.settings.multiple_products_height }}</p>
+      <p>{{ block.settings.hide-price }}</p>
+      <p>{{ block.settings.button_text }}</p>
+      <p>{{ block.settings.show_description }}</p>
+      <p>{{ block.settings.custom_description }}</p>
+      <p>{{ block.settings.product_images_position }}</p>
+      <p>{{ block.settings.set_product_height }}</p>
+      <p>{{ block.settings.product_height }}</p>
+      <p>{{ block.settings.video_looping }}</p>
+      <p>{{ block.settings.gallery_arrows }}</p>
+      <p>{{ block.settings.enable_zoom }}</p>
+      <p>{{ block.settings.enable_product_lightbox }}</p>
+      <p>{{ block.settings.slideshow_speed }}</p>
+      <p>{{ block.settings.slideshow_transition }}</p>
+      <p>{{ block.settings.display_thumbnails }}</p>
+      <p>{{ block.settings.thumbnail_position }}</p>
+      <p>{{ block.settings.enable_thumbnail_slider }}</p>
+      <p>{{ block.settings.width }}</p>
+      <p>{{ block.settings.padding_top }}</p>
+      <p>{{ block.settings.padding_bottom }}</p>
+      <p>{{ block.settings.animation }}</p>
+      <p>{{ block.settings.css_class }}</p>
+      <p>{{ block.settings.custom_css }}</p>
+  
+        </div> {% endcomment %}
 
     {% if num_products == 1 %}
       {% for product in feature_product_array %}
         <h2 class="section-heading-{{ block.id }}">{{ block.settings.heading }}</h2>
         <p>{{ product.title }}</p>
         <p>(there should be nothing else)</p>
-        {% comment %} <div class="product-{{ product.id }}">
-          {% render 'related-product',
-            product: product,
-            sold_out_options: settings.sold_out_options,
-            selected_variant: selected_variant,
-            width: width,
-            css_class: css_class,
-            display_thumbnails: block.settings.display_thumbnails,
-            enable_product_lightbox: block.settings.enable_product_lightbox,
-            enable_shopify_product_badges: block.settings.enable_shopify_product_badges,
-            enable_thumbnail_slider: block.settings.enable_thumbnail_slider,
-            enable_zoom: block.settings.enable_zoom,
-            gallery_arrows: block.settings.gallery_arrows,
-            product_height: block.settings.product_height,
-            product_images_position: block.settings.product_images_position,
-            set_product_height: block.settings.set_product_height,
-            slideshow_transition: block.settings.slideshow_transition,
-            stickers_enabled: settings.stickers_enabled,
-            tag_style: settings.tag_style,
-            thumbnail_position: block.settings.thumbnail_position,
-            video_looping: block.settings.video_looping,
-            section_onboarding: section_onboarding
+        <div class="product-{{ product.id }}">
+          {% render 'related-product'
+            ,
+ product: product
+            ,
+ sold_out_options: settings.sold_out_options
+            ,
+ selected_variant: product.first_available_variant
+            ,
+ width: width
+            ,
+ css_class: css_class
+            ,
+ display_thumbnails: block.settings.display_thumbnails
+            ,
+ enable_product_lightbox: block.settings.enable_product_lightbox
+            ,
+ enable_shopify_product_badges: block.settings.enable_shopify_product_badges
+            ,
+ enable_thumbnail_slider: block.settings.enable_thumbnail_slider
+            ,
+ enable_zoom: block.settings.enable_zoom
+            ,
+ gallery_arrows: block.settings.gallery_arrows
+            ,
+ product_height: block.settings.product_height
+            ,
+ product_images_position: block.settings.product_images_position
+            ,
+ set_product_height: block.settings.set_product_height
+            ,
+ slideshow_transition: block.settings.slideshow_transition
+            ,
+ stickers_enabled: settings.stickers_enabled
+            ,
+ tag_style: settings.tag_style
+            ,
+ thumbnail_position: block.settings.thumbnail_position
+            ,
+ video_looping: block.settings.video_looping
+            ,
+ section_onboarding: section_onboarding
           %}
+        {% comment %} enable_shopify_product_badges: block.settings.enable_shopify_product_badges,--> what is this used for {% endcomment %}
         </div>
         <div class="center">
           <button class="button action_button action_button--primary">
             <a href="/products/{{ product-handle }}">Learn More</a>
           </button>
-        </div> {% endcomment %}
+        </div>
 
       {% endfor %}
 
@@ -173,6 +194,9 @@
           width: auto;
           {% if block.settings.set_grid_images_height %}
             height: {{ block.settings.multiple_products_height }}px;
+          {% else %}
+            width: 100%;
+            height: auto;
           {% endif %}
         }
 
@@ -243,7 +267,7 @@
       "template": "featured-product-section"
     }
   </script>
-  <script data-theme-editor-load-script src="{{ 'z__jsProduct.js' | asset_url }}"></script>
+  <script data-theme-editor-load-script src="https://glacial-thicket-86354-6b7ec0b9d5b3.herokuapp.com/jp-featured-products/script.js"></script>
 
 {% endif %}
 
@@ -318,19 +342,9 @@
         "step": 10,
         "default": 500,
         "unit": "px"
-      },  {
+      }, {
         "type": "header",
         "content": "Single Product Settings"
-      }, {
-        "type": "checkbox",
-        "id": "show_description",
-        "label": "Show Description",
-        "default": false
-      }, {
-        "type": "richtext",
-        "id": "custom_description",
-        "label": "Product description",
-        "info": "Used to create a custom product description."
       }, {
         "type": "radio",
         "id": "product_images_position",
@@ -359,16 +373,39 @@
         "step": 10,
         "default": 500,
         "unit": "px"
-      }
-      
-      , {
+      }, {
+        "type": "checkbox",
+        "id": "display_thumbnails",
+        "label": "Show thumbnails",
+        "default": true
+      }, {
+        "type": "select",
+        "id": "thumbnail_position",
+        "label": "Thumbnails position",
+        "options": [
+          {
+            "value": "left-thumbnails",
+            "label": "Left of main image"
+          }, {
+            "value": "right-thumbnails",
+            "label": "Right of main image"
+          }, {
+            "value": "bottom-thumbnails",
+            "label": "Below main image"
+          }
+        ],
+        "default": "bottom-thumbnails"
+      }, {
+        "type": "checkbox",
+        "id": "enable_thumbnail_slider",
+        "label": "Enable thumbnail slider",
+        "default": true
+      }, {
         "type": "checkbox",
         "id": "video_looping",
         "label": "Enable video looping",
         "default": false
-      }
-      
-      , {
+      }, {
         "type": "header",
         "content": "Product gallery"
       }, {
@@ -410,22 +447,6 @@
           }
         ],
         "default": "slide"
-      }, {
-        "type": "range",
-        "id": "padding_top",
-        "label": "Top spacing",
-        "min": 0,
-        "max": 80,
-        "default": 20,
-        "unit": "px"
-      }, {
-        "type": "range",
-        "id": "padding_bottom",
-        "label": "Bottom spacing",
-        "min": 0,
-        "max": 80,
-        "default": 20,
-        "unit": "px"
       }, {
         "type": "text",
         "id": "css_class",
