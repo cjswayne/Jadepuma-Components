@@ -1,8 +1,8 @@
 {% comment %} 
-     
-      Custom app block added by JadePuma
-      Instructions - https://jadepuma.com/blogs/shopify-tutorials/promote-a-product-in-an-article-in-the-flex-theme
-      Last editted - 2/12/24 
+ 
+  Custom app block added by JadePuma
+  Instructions - https://jadepuma.com/blogs/shopify-tutorials/promote-a-product-in-an-article-in-the-flex-theme
+  Last editted - 2/12/24 
 {% endcomment %}
 
 {% assign feature_product_array = article.metafields.jadepuma.featured_products.value %}
@@ -47,92 +47,305 @@
                   {{ block.settings.css_class }}
                   is-width-{{ block.settings.width }}
                   "
-    {% if block.settings.animation != "none" %}
+    {% if block.settings.animation !="none" %}
     data-scroll-class="{{ block.settings.animation }}"
     {% endif %}>
-
-    {% comment %} <div>
-            <p>{{ block.settings.heading }}</p>
-      <p>{{ block.settings.multiple_products_heading }}</p>
-      <p>{{ block.settings.heading_color }}</p>
-      <p>{{ block.settings.heading_background_color }}</p>
-      <p>{{ block.settings.products_per_row }}</p>
-      <p>{{ block.settings.set_grid_images_height }}</p>
-      <p>{{ block.settings.multiple_products_height }}</p>
-      <p>{{ block.settings.hide-price }}</p>
-      <p>{{ block.settings.button_text }}</p>
-      <p>{{ block.settings.show_description }}</p>
-      <p>{{ block.settings.custom_description }}</p>
-      <p>{{ block.settings.product_images_position }}</p>
-      <p>{{ block.settings.set_product_height }}</p>
-      <p>{{ block.settings.product_height }}</p>
-      <p>{{ block.settings.video_looping }}</p>
-      <p>{{ block.settings.gallery_arrows }}</p>
-      <p>{{ block.settings.enable_zoom }}</p>
-      <p>{{ block.settings.enable_product_lightbox }}</p>
-      <p>{{ block.settings.slideshow_speed }}</p>
-      <p>{{ block.settings.slideshow_transition }}</p>
-      <p>{{ block.settings.display_thumbnails }}</p>
-      <p>{{ block.settings.thumbnail_position }}</p>
-      <p>{{ block.settings.enable_thumbnail_slider }}</p>
-      <p>{{ block.settings.width }}</p>
-      <p>{{ block.settings.padding_top }}</p>
-      <p>{{ block.settings.padding_bottom }}</p>
-      <p>{{ block.settings.animation }}</p>
-      <p>{{ block.settings.css_class }}</p>
-      <p>{{ block.settings.custom_css }}</p>
-  
-        </div> {% endcomment %}
 
     {% if num_products == 1 %}
       {% for product in feature_product_array %}
         <h2 class="section-heading-{{ block.id }}">{{ block.settings.heading }}</h2>
-        <p>{{ product.title }}</p>
-        <p>(there should be nothing else)</p>
         <div class="product-{{ product.id }}">
-          {% render 'related-product'
-            ,
+          {% comment %} #################### RELATED PRODUCT #################### {% endcomment %}
+
+          {% assign product = product %}
+          {% assign sold_out_options = settings.sold_out_options %}
+          {% assign selected_variant = product.first_available_variant %}
+          {% assign width = width %}
+          {% assign css_class = css_class %}
+          {% assign display_thumbnails = block.settings.display_thumbnails %}
+          {% assign enable_product_lightbox = block.settings.enable_product_lightbox %}
+          {% assign enable_shopify_product_badges = block.settings.enable_shopify_product_badges %}
+          {% assign enable_thumbnail_slider = block.settings.enable_thumbnail_slider %}
+          {% assign enable_zoom = block.settings.enable_zoom %}
+          {% assign gallery_arrows = block.settings.gallery_arrows %}
+          {% assign product_height = block.settings.product_height %}
+          {% assign product_images_position = block.settings.product_images_position %}
+          {% assign set_product_height = block.settings.set_product_height %}
+          {% assign slideshow_transition = block.settings.slideshow_transition %}
+          {% assign stickers_enabled = settings.stickers_enabled %}
+          {% assign tag_style = settings.tag_style %}
+          {% assign thumbnail_position = block.settings.thumbnail_position %}
+          {% assign video_looping = block.settings.video_looping %}
+          {% assign section_onboarding = section_onboarding %}
+          
+
+          <div class="product_section
+            js-product_section
+            container
+            is-justify-space-between
+            has-padding-bottom
+            {% if product_images_position == 'right' %}
+              is-flex-row-reverse
+            {% endif %}">
+
+            <div class="product__images
+              one-half
+              column
+              medium-down--one-whole">
+              {% if section_onboarding %}
+                <div class="featured-product__images">
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--product' }}
+                </div>
+              {% else %}
+                {% render 'product__images'
+                  ,
  product: product
-            ,
- sold_out_options: settings.sold_out_options
-            ,
- selected_variant: product.first_available_variant
-            ,
- width: width
-            ,
- css_class: css_class
-            ,
- display_thumbnails: block.settings.display_thumbnails
-            ,
- enable_product_lightbox: block.settings.enable_product_lightbox
-            ,
- enable_shopify_product_badges: block.settings.enable_shopify_product_badges
-            ,
- enable_thumbnail_slider: block.settings.enable_thumbnail_slider
-            ,
- enable_zoom: block.settings.enable_zoom
-            ,
- gallery_arrows: block.settings.gallery_arrows
-            ,
- product_height: block.settings.product_height
-            ,
- product_images_position: block.settings.product_images_position
-            ,
- set_product_height: block.settings.set_product_height
-            ,
- slideshow_transition: block.settings.slideshow_transition
-            ,
- stickers_enabled: settings.stickers_enabled
-            ,
- tag_style: settings.tag_style
-            ,
- thumbnail_position: block.settings.thumbnail_position
-            ,
- video_looping: block.settings.video_looping
-            ,
- section_onboarding: section_onboarding
-          %}
-        {% comment %} enable_shopify_product_badges: block.settings.enable_shopify_product_badges,--> what is this used for {% endcomment %}
+                  ,
+ display_thumbnails: display_thumbnails
+                  ,
+ thumbnail_position: thumbnail_position
+                  ,
+ enable_thumbnail_slider: enable_thumbnail_slider
+                  ,
+ product_height: product_height
+                  ,
+ set_product_height: set_product_height
+                  ,
+ video_looping: video_looping
+ gallery_arrows: gallery_arrows
+                  ,
+ slideshow_transition: slideshow_transition
+                  ,
+ enable_product_lightbox: enable_product_lightbox
+                  ,
+ enable_zoom: enable_zoom
+                %}
+              {% endif %}
+            </div>
+
+            <div class="product__information
+              has-product-sticker
+              one-half
+              column
+              medium-down--one-whole">
+
+              {% comment %} Sale sticker {% endcomment %}
+              {% if stickers_enabled %}
+                {% assign collection_handles = product.collections | map: 'handle' %}
+                {% render 'product-thumbnail__sticker'
+                  ,
+ context: 'product'
+                  ,
+ collection_handles: collection_handles
+                  ,
+                %}
+              {% endif %}
+
+
+              <div class="product-block
+                product-block--{{ block.type | downcase | replace: '_', '-' }}
+                {% if forloop.first == true %}
+                  product-block--first
+                {% endif %}" {{ block.shopify_attributes }}>
+
+
+                {% comment %} Name {% endcomment %}
+                <h1 class="product_name title">
+                  {% if section_id == 'quickshop' %}
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  {% elsif section_onboarding %}
+                    {{ 'homepage.onboarding.product_title' | t }}
+                  {% else %}
+                    {{ product.title }}
+                  {% endif %}
+                </h1>
+
+              </div>
+
+              <div class="product-block
+                product-block--{{ block.type | downcase | replace: '_', '-' }}
+                {% if forloop.first == true %}
+                  product-block--first
+                {% endif %}" {{ block.shopify_attributes }}>
+
+                {% comment %} Price {% endcomment %}
+
+                <div
+                  class="modal_price subtitle"
+                  style="{% if section.settings.hide-price == true %} display:none;{% endif %}"
+                  data-display-savings="{{ block.settings.display_savings }}">
+                  {% if section_onboarding %}
+                    <span class="money">$49.00</span>
+                  {% else %}
+                    {% comment %}Inject @pixelunion/shopify-price-ui/price-ui begin{% endcomment %}
+                    <div class="price-ui price-ui--loading" data-price-ui>
+                      <noscript>
+                        <style>
+                          .price-ui--loading {
+                            display: block !important;
+                            opacity: 1 !important;
+                          }
+                        </style>
+                      </noscript>
+                      {% assign compare_at_price = false %}
+
+                      {% if product.compare_at_price and product.compare_at_price != product.price %}
+                        {% if product.compare_at_price_varies %}
+                          {%- capture price_min -%}
+              {%-
+              render 'price-ui-templates',
+              template: 'price-min',
+              value: product.compare_at_price_min,
+              -%}
+              {%- endcapture -%}
+
+                          {%- capture price_max -%}
+              {%-
+              render 'price-ui-templates',
+              template: 'price-max',
+              value: product.compare_at_price_max,
+              -%}
+              {%- endcapture -%}
+
+                          {%- assign compare_at_price = 'product.price.range_html' | t: price_min: price_min, price_max: price_max
+                          -%}
+                        {% else %}
+                          {%- capture compare_at_price -%}
+              {%-
+              render 'price-ui-templates',
+              template: 'price',
+              value: product.compare_at_price,
+              -%}
+              {%- endcapture -%}
+                        {% endif %}
+                      {% endif %}
+
+                      {% if product.price_varies %}
+                        {%- capture price_min -%}
+              {%-
+              render 'price-ui-templates',
+              template: 'price-min',
+              value: product.price_min,
+              -%}
+              {%- endcapture -%}
+
+                        {%- capture price_max -%}
+              {%-
+              render 'price-ui-templates',
+              template: 'price-max',
+              value: product.price_max,
+              -%}
+              {%- endcapture -%}
+
+                        {%- assign price = 'product.price.range_html' | t: price_min: price_min, price_max: price_max -%}
+
+                      {% else %}
+                        {%- capture price -%}
+              {%-
+              render 'price-ui-templates',
+              template: 'price',
+              value: product.price,
+              -%}
+              {%- endcapture -%}
+                      {% endif %}
+
+                      {%- render 'price-ui-templates'
+                        ,
+ template: 'price-ui'
+                        ,
+ compare_at_price: compare_at_price
+                        ,
+ price: price
+                        ,
+ unit_pricing: false
+                        ,
+                      -%}
+                    </div>
+                    {% comment %}Inject @pixelunion/shopify-price-ui/price-ui end{% endcomment %}
+
+                  {% endif %}
+                </div>
+
+              </div>
+
+
+              {% comment %} Purchase form {% endcomment %}
+              {% if section_onboarding %}
+                <div class="product-form-container has-padding-top">
+                  <div class="purchase-details">
+                    <div class="purchase-details__buttons purchase-details__spb--false">
+                      <button
+                        name="add"
+                        class="action_button button button--add-to-cart add_to_cart"
+                        data-label={{ add_to_cart_label | json }}>
+                        <span class="text">{{ 'products.product.add_to_cart' | t }}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                <div class="product-form-container has-padding-top">
+
+                  {% comment %} Notify form {% endcomment %}
+                  {% render 'product__notify-me-form'
+                    , product: product %}
+
+                  {% comment %} Product form {% endcomment %}
+                  {% unless collection_handles contains 'coming-soon' %}
+                    {% render 'product__form'
+                      ,
+ context: 'product'
+                      ,
+ product: product
+                      ,
+ sold_out_options: sold_out_options
+                      ,
+ selected_variant: selected_variant
+                      ,
+ show_payment_button: section.settings.show_payment_button
+                      ,
+ collection_handles: collection_handles
+                    %}
+                  {% endunless %}
+                </div>
+              {% endif %}
+
+
+              {% if section.settings.show_description %}
+
+                <div class="product-block
+                  product-block--{{ block.type | downcase | replace: '_', '-' }}
+                  {% if forloop.first == true %}
+                    product-block--first
+                  {% endif %}" {{ block.shopify_attributes }}>
+
+                  {% comment %} Description {% endcomment %}
+                  {% if section.settings.custom_description != blank %}
+                    <div class="description content has-padding-top">
+                      {{ section.settings.custom_description }}
+                    </div>
+                  {% elsif section_onboarding %}
+                    <div class="description content has-padding-top">
+                      <p>
+                        {{ 'homepage.onboarding.product_description' | t }}
+                      </p>
+                    </div>
+                  {% else %}
+                    {% if product.description != blank %}
+                      <div class="description content has-padding-top">
+                        {{ product.description | split: '<!-- split -->' | first }}
+                      </div>
+                    {% endif %}
+                  {% endif %}
+
+
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+        {% comment %} #################### END RELATED PRODUCT #################### {% endcomment %}
+
         </div>
         <div class="center">
           <button class="button action_button action_button--primary">
@@ -143,6 +356,7 @@
       {% endfor %}
 
     {% else %}
+        {% comment %} #################### MULTIPLE PRODUCTS #################### {% endcomment %}
 
       {% assign block_width = 100 | divided_by: block.settings.products_per_row %}
 
@@ -241,9 +455,9 @@
   {% comment %} Shopify-XR {% endcomment %}
   {% if product.media %}
     <script>
-          window.ShopifyXR=window.ShopifyXR||function(){(ShopifyXR.q=ShopifyXR.q||[]).push(arguments)}
-      {% assign models = product.media | where: 'media_type', 'model' | json %}
-      ShopifyXR('addModels', {{ models }});
+        window.ShopifyXR = window.ShopifyXR || function () { (ShopifyXR.q = ShopifyXR.q || []).push(arguments) }
+        {% assign models = product.media | where: 'media_type', 'model' | json %}
+        ShopifyXR('addModels', {{ models }});
     </script>
   {% endif %}
 
